@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import List from "./List";
+import birthdaysData from "./birthdaysData";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [persons, usePerson] = useState(birthdaysData);
+
+    const ResetAllBirthdays = () => {
+        usePerson([]);
+    };
+
+    return (
+        <div className="container">
+            <div className="card">
+                <div className="card-title">
+                    <h2>{persons.length} birthday found</h2>
+                </div>
+                <div className="card-list">
+                    <List persons={persons} />
+                </div>
+                <button className="card-clear-all" onClick={ResetAllBirthdays}>
+                    Clear All
+                </button>
+            </div>
+        </div>
+    );
 }
 
 export default App;
